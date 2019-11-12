@@ -39,6 +39,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.totalReports = reportData.reportCount;
         this.reports = reportData.reports;
+        console.log(reportData);
       });
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService

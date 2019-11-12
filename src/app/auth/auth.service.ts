@@ -14,6 +14,7 @@ export class AuthService {
   private token: string;
   private tokenTimer: any;
   private userId: string;
+  private userName: string;
   private authStatusListener = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -33,9 +34,13 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  createUser(email: string, password: string) {
+  createUser(userName: string, email: string, password: string) {
     const authData: AuthData = { email: email, password: password };
-    this.http.post(BACKEND_URL + "/signup", {authData}).subscribe(
+    authData["userName"] = userName;
+    this.http.post(
+      BACKEND_URL + "/signup", 
+      authData)
+      .subscribe(
       () => {
         this.router.navigate(["/"]);
       },
