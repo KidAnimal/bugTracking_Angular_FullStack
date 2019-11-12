@@ -2,6 +2,8 @@
 
 APPLICATION IS HOSTED HERE: http://spoor-mean.s3-website.us-east-2.amazonaws.com/
 
+This is a full stack application I am currently working on. The main functionality will be a Bug Tracker - however I am working toward to doing a full agile development platform. 
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.1.
 
 ## Development server

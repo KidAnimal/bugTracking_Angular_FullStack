@@ -10,13 +10,15 @@ import { AuthInterceptor } from "./auth/auth-interceptor";
 import { ErrorInterceptor } from "./error-interceptor";
 import { ErrorComponent } from "./error/error.component";
 import { AngularMaterialModule } from "./angular-material.module";
-import { PostsModule } from "./posts/posts.module";
+import { ReportsModule } from "./reports/reports.module";
+import { ProjectListComponent } from './projects/project-list/project-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ErrorComponent
+    ErrorComponent,
+    ProjectListComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,7 @@ import { PostsModule } from "./posts/posts.module";
     BrowserAnimationsModule,
     HttpClientModule,
     AngularMaterialModule,
-    PostsModule
+    ReportsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,0 +1,22 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="reports.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let report of reports">
+    <mat-expansion-panel-header>
+      {{ report.title }}
+    </mat-expansion-panel-header>
+    <div class="report-image">
+      <img [src]="report.imagePath" [alt]="report.title">
+    </div>
+    <p>Description: {{ report.summary }}</p>
+    <p>Status: {{ report.bugStatus }}</p>
+    <p>Creator: {{ report.creator }}</p>
+    <p>Assignee: {{ report.assignee }}</p>
+    <mat-action-row *ngIf="userIsAuthenticated && userId === report.creator">
+      <a mat-button color="primary" [routerLink]="['/edit', report.id]">EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(report.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator [length]="totalReports" [pageSize]="reportsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  *ngIf="reports.length > 0"></mat-paginator>
+<p class="info-text mat-body-1" *ngIf="reports.length <= 0 && !isLoading">No reports added yet!</p>

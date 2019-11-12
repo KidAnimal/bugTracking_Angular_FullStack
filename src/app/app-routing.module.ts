@@ -1,14 +1,16 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { PostListComponent } from "./posts/post-list/post-list.component";
-import { PostCreateComponent } from "./posts/post-create/post-create.component";
+import { ReportListComponent } from "./reports/report-list/report-list.component";
+import { ReportCreateComponent } from "./reports/report-create/report-create.component";
 import { AuthGuard } from "./auth/auth.guard";
+import { ProjectListComponent } from "./projects/project-list/project-list.component";
 
 const routes: Routes = [
-  { path: "", component: PostListComponent },
-  { path: "create", component: PostCreateComponent, canActivate: [AuthGuard] },
-  { path: "edit/:postId", component: PostCreateComponent, canActivate: [AuthGuard] },
-  { path: "auth", loadChildren: "./auth/auth.module#AuthModule"}
+  { path: "", component: ReportListComponent },
+  { path: "create", component: ReportCreateComponent, canActivate: [AuthGuard] },
+  { path: "edit/:postId", component: ReportCreateComponent, canActivate: [AuthGuard] },
+  { path: "auth", loadChildren: "./auth/auth.module#AuthModule"},
+  { path: "projects", component: ProjectListComponent },
 ];
 
 @NgModule({
