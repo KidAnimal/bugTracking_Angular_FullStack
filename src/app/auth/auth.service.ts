@@ -6,7 +6,7 @@ import { Subject } from "rxjs";
 import { environment } from "../../environments/environment";
 import { AuthData } from "./auth-data.model";
 
-const BACKEND_URL = environment.apiUrl + "/user/";
+const BACKEND_URL = environment.apiUrl + "/user";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -14,6 +14,7 @@ export class AuthService {
   private token: string;
   private tokenTimer: any;
   private userId: string;
+  private userName: string;
   private authStatusListener = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -29,14 +30,17 @@ export class AuthService {
   getUserId() {
     return this.userId;
   }
-
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
   }
 
-  createUser(email: string, password: string) {
+  createUser(userName: string, email: string, password: string) {
     const authData: AuthData = { email: email, password: password };
-    this.http.post(BACKEND_URL + "/signup", authData).subscribe(
+    authData["userName"] = userName;
+    this.http.post(
+      BACKEND_URL + "/signup", 
+      authData)
+      .subscribe(
       () => {
         this.router.navigate(["/"]);
       },
@@ -47,9 +51,9 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    const authData: AuthData = { email: email, password: password };
+    const authData: AuthData = {email: email, password: password };
     this.http
-      .post<{ token: string; expiresIn: number; userId: string }>(
+      .post<{ token: string; expiresIn: number; userId: string}>(
         BACKEND_URL + "/login",
         authData
       )
@@ -57,7 +61,7 @@ export class AuthService {
         response => {
           const token = response.token;
           this.token = token;
-          if (token) {
+          if (token) {     
             const expiresInDuration = response.expiresIn;
             this.setAuthTimer(expiresInDuration);
             this.isAuthenticated = true;

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Bug Report List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-list>
+
+  <ion-item-sliding *ngFor="let item of items">
+    <ion-item>
+      <ion-avatar item-start>
+        <img [src] = "item.avatarImage">
+      </ion-avatar>
+      <h2>Slimer</h2>
+    </ion-item>
+    <ion-item-options side="start">
+      <button ion-button color="accent">
+        <ion-icon name="Assignee"></ion-icon>
+        Assignee
+      </button>
+      <button ion-button color="accent">
+        <ion-icon name="call"></ion-icon>
+        Progress
+      </button>
+    </ion-item-options>
+    <ion-item-options side="end">
+      <button ion-button color="primary">
+        <ion-icon name="mail"></ion-icon>
+        Email
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+
+<ion-content></ion-content>
