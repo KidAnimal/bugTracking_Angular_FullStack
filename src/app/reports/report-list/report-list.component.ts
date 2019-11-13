@@ -33,13 +33,15 @@ export class ReportListComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.reportsService.getReports(this.reportsPerPage, this.currentPage);
     this.userId = this.authService.getUserId();
+    this.userName = this.authService.getUserName();
+
     this.reportsSub = this.reportsService
       .getReportUpdateListener()
       .subscribe((reportData: { reports: Report[]; reportCount: number }) => {
         this.isLoading = false;
         this.totalReports = reportData.reportCount;
         this.reports = reportData.reports;
-        console.log(reportData);
+        console.log(this.reports);
       });
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService
@@ -47,6 +49,9 @@ export class ReportListComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
+        this.userName = this.authService.getUserName();
+        console.log("user ID: " + this.userId);
+        console.log("user Name: " + this.userName);
       });
   }
 

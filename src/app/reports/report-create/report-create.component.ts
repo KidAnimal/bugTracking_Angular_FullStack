@@ -30,6 +30,7 @@ export class ReportCreateComponent implements OnInit, OnDestroy {
   private mode = "create";
   private reportId: string;
   private authStatusSub: Subscription;
+  // private currentUser: string = new User; 
 
   constructor(
     public reportsService: ReportsService,
@@ -52,7 +53,7 @@ export class ReportCreateComponent implements OnInit, OnDestroy {
         validators: [Validators.required],
         asyncValidators: [mimeType]
       }),
-      creator: new FormControl(null),
+      creatorId: new FormControl(null),
       userName: new FormControl(null),
       assignee: new FormControl(null),
       bugStatus: new FormControl(null),
@@ -69,7 +70,8 @@ export class ReportCreateComponent implements OnInit, OnDestroy {
             title: reportData.title,
             summary: reportData.summary,
             imagePath: reportData.imagePath,
-            creator: reportData.creator,
+            creatorId: reportData.creatorId,
+            userName: reportData.userName,
             assignee: reportData.assignee,
             bugStatus: reportData.bugStatus 
           };
@@ -77,7 +79,8 @@ export class ReportCreateComponent implements OnInit, OnDestroy {
             title: this.report.title,
             summary: this.report.summary,
             image: this.report.imagePath,
-            creator: this.report.creator,
+            creatorId: this.report.creatorId,
+            userName: this.report.userName,
             assignee: this.report.assignee,
             bugStatus: this.report.bugStatus 
           });
@@ -110,7 +113,8 @@ export class ReportCreateComponent implements OnInit, OnDestroy {
         this.form.value.title,
         this.form.value.summary,
         this.form.value.image,
-        this.form.value.creator,
+        this.form.value.creatorId,
+        this.form.value.userName,
         this.form.value.assignee,
         this.form.value.bugStatus 
       );
@@ -120,7 +124,8 @@ export class ReportCreateComponent implements OnInit, OnDestroy {
         this.form.value.title,
         this.form.value.summary,
         this.form.value.image,
-        this.form.value.creator,
+        this.form.value.creatorId,
+        this.form.value.userName,
         this.form.value.assignee,
         this.form.value.bugStatus 
       );

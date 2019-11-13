@@ -23,7 +23,6 @@ exports.createReport = (req, res, next) => {
       });
     })
     .catch(error => {
-      console.log(error);
       res.status(500).json({
         message: "Creating a report failed!"
       });
@@ -43,11 +42,11 @@ exports.updateReport = (req, res, next) => {
     assignee: req.body.assignee,
     imagePath: imagePath,
     creatorId: req.userData.userId,
-    // userName: req.userData.userName,
+    userName: req.userData.userName,
     assignee: req.body.assignee,
     bugStatus: req.body.bugStatus
   });
-  Report.updateOne({ _id: req.params.id, creatorId: req.userData.userId }, report)
+  Report.updateOne({ _id: req.params.id, creatorId: req.userData.userId, userName: req.userData.userName }, report)
     .then(result => {
       if (result.n > 0) {
         res.status(200).json({ message: "Update successful!" });

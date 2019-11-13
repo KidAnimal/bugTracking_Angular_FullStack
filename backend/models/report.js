@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const reportSchema = mongoose.Schema({
   creatorId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  // creator: { type: String, required: true},
+  userName: { type: String, ref: "User", required: true},
   title: { type: String, required: true },
   summary: { type: String, required: true },
   imagePath: { type: String, required: true },
-  assignee: { type: String, required: false },
+  assignee: { type: String, required: false }, 
   bugStatus: { type: String, required: false }
 });
 

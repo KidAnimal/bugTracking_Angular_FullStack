@@ -3,7 +3,8 @@ export interface Report {
   title: string;
   summary: string;
   imagePath: string;
-  creator: string;
+  creatorId: string;
+  userName: string;
   assignee: string;
   bugStatus: string;
 }

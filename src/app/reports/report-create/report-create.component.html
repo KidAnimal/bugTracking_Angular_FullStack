@@ -30,8 +30,8 @@
       <img [src]="imagePreview" [alt]="form.value.title">
     </div>
     <mat-form-field>
-      <textarea matInput rows="4" formControlName="creator" placeholder="Creator"></textarea>
-      <mat-error *ngIf="form.get('creator').invalid">Please enter a report title.</mat-error>
+      <textarea matInput rows="4" formControlName="creatorId" placeholder="Creator Id"></textarea>
+      <mat-error *ngIf="form.get('creatorId').invalid">Please enter a report title.</mat-error>
     </mat-form-field>
     <button mat-raised-button color="accent" type="submit">Save Report</button>
   </form>
