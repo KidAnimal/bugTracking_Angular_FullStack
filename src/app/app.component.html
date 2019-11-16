@@ -1,5 +1,22 @@
 <app-header></app-header>
-<main>
-  <router-outlet></router-outlet>
-</main>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-drawer-container class="example-container" [hasBackdrop]="true" #mode value="mode.value">
+  <mat-drawer #drawer [mode]="push">
+    <h2>Spoor</h2>
+    <img alt="spoorLogo" src="http://via.placeholder.com/100x100"/>
+    <ul class="sideNavUl">
+        <li class="sideNavLi"><a [routerLink]="['/']">Projects</a></li>
+        <li class="sideNavLi"><a [routerLink]="['/']">RoadMap</a></li>
+        <li class="sideNavLi"><a [routerLink]="['/teamManager']">Team</a></li>
+        <li class="sideNavLi"><a [routerLink]="['/']">Settings</a></li>
+    </ul>
+  </mat-drawer>
+  <mat-drawer-content>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>  
+  <!-- *ngIf="userIsAuthenticated" -->
+</mat-drawer-content>
+</mat-drawer-container>
 <!-- <app-error *ngIf="hasError"></app-error> -->

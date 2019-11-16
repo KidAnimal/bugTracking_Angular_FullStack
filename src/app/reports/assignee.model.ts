@@ -1,4 +1,4 @@
 export interface Assignee {
-    value: number;
+    value: string;
     viewValue: string;
   }

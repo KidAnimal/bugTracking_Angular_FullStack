@@ -6,11 +6,14 @@ import { RouterModule } from "@angular/router";
 import { ReportCreateComponent } from "./report-create/report-create.component";
 import { ReportListComponent } from "./report-list/report-list.component";
 import { AngularMaterialModule } from "../angular-material.module";
+import { SidebarNavComponent } from "../sidebar-nav/sidebar-nav.component";
+import { SearchBarComponent } from "../search-bar/search-bar.component";
 
 @NgModule({
   declarations: [
     ReportCreateComponent, 
-    ReportListComponent
+    ReportListComponent,
+    SidebarNavComponent
   ],
   imports: [
     CommonModule,

@@ -41,9 +41,16 @@ export class ReportCreateComponent implements OnInit, OnDestroy {
   ngOnInit() {
   this.authService.getUsers().subscribe((data:any[])=>{
         for(let i=0; i<data.length;i++){
-          this.assignees.push({value:i,viewValue: JSON.stringify(data[i]).replace(/[{}]/g,"")});
+          this.assignees.push({value:JSON.stringify(data[i]).replace(/[{}]/g,""),viewValue: JSON.stringify(data[i]).replace(/username/i,"")});
         } 
       });
+      // this.http.get<any[]>(this.userURL).subscribe(data => {
+      //   // Populating usersArray with names from API
+      //   data.forEach(element => {
+      //     this.assignees.push(element.userName);
+      //     console.log(this.assignees)
+      //   });
+      // })
 
     this.bugStatus = [
       { value: 'To-Do', viewValue:'To-Do' },

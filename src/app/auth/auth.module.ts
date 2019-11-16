@@ -10,7 +10,8 @@ import { ProfileComponent } from './profile/profile.component';
 @NgModule({
   declarations: [
     LoginComponent, 
-    SignupComponent, ProfileComponent
+    SignupComponent, 
+    ProfileComponent
   ],
   imports: [
     CommonModule, 
