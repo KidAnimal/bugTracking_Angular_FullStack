@@ -8,6 +8,7 @@ import { Report } from "../Report";
 import { mimeType } from "./mime-type.validator";
 import { AuthService } from "../../auth/auth.service";
 import { Status } from '../status.model';
+import { Assignee } from '../assignee.model';
 
 @Component({
   selector: "app-report-create",
@@ -16,11 +17,10 @@ import { Status } from '../status.model';
 })
 export class ReportCreateComponent implements OnInit, OnDestroy {
 
-  bugStatus: Status[] = [
-    { value: 'todo', viewValue:'To-Do' },
-    { value: 'progress', viewValue:'In Progress' },
-    { value: 'completed', viewValue:'Done' }
-  ];
+  bugStatus: Status[];
+  private users:any;
+  selectedStatus:any; 
+  private assignees: Assignee[] = [];
   enteredTitle = "";
   enteredContent = "";
   report: Report;
@@ -35,10 +35,25 @@ export class ReportCreateComponent implements OnInit, OnDestroy {
   constructor(
     public reportsService: ReportsService,
     public route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
+  this.authService.getUsers().subscribe((data:any[])=>{
+        for(let i=0; i<data.length;i++){
+          this.assignees.push({value:i,viewValue: JSON.stringify(data[i]).replace(/[{}]/g,"")});
+        } 
+      });
+
+    this.bugStatus = [
+      { value: 'To-Do', viewValue:'To-Do' },
+      { value: 'In Progress', viewValue:'In Progress' },
+      { value: 'Completed', viewValue:'Done' }
+    ]; 
+
+  this.selectedStatus = "todo";
+
+
     this.authStatusSub = this.authService
       .getAuthStatusListener()
       .subscribe(authStatus => {
@@ -102,7 +117,6 @@ export class ReportCreateComponent implements OnInit, OnDestroy {
     };
     reader.readAsDataURL(file);
   }
-
   onSaveReport() {
     if (this.form.invalid) {
       return;

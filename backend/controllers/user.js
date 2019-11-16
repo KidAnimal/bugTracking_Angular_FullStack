@@ -45,14 +45,14 @@ exports.userLogin = (req, res, next) => {
         });
       }
       const token = jwt.sign(
-        { email: fetchedUser.email, userId: fetchedUser._id, userName: fetchedUser.userName },
+        { email: fetchedUser.email, userId: fetchedUser._id},
         process.env.JWT_KEY,
         { expiresIn: "1h" }
       );
       res.status(200).json({
         token: token,
         expiresIn: 3600,
-        userId: fetchedUser._id
+        userId: fetchedUser._id,
       });
     })
     .catch(err => {
@@ -61,3 +61,35 @@ exports.userLogin = (req, res, next) => {
       });
     });
 }
+
+exports.getUserName = (req, res, next) => {
+  User.findById(req.params.id)
+    .then(user => {
+      if (user) {
+        res.status(200).json(user.userName);
+      } else {
+        res.status(404).json({ message: "User not found!" });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Fetching user failed!"
+      });
+    });
+};
+
+exports.getUserNames = (req, res, next) => {
+  User.find({},{_id:0,userName:1}).sort({userName:1})
+    .then(user => {
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        res.status(404).json({ message: "Users not found!" });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Fetching users failed!"
+      });
+    });
+};

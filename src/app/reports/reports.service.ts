@@ -14,6 +14,7 @@ const BACKEND_URL = environment.apiUrl + "/reports/";
 @Injectable({ providedIn: "root" })
 export class ReportsService implements OnInit {
   private reports: Report[] = [];
+  private users;
   private authService: AuthService;
   
   private reportsUpdated = new Subject<{ reports: Report[]; reportCount: number }>();
@@ -128,6 +129,5 @@ export class ReportsService implements OnInit {
   }
 
   ngOnInit(){
-    console.log("attempt" + this.authService.loggedUser);
   }
 }

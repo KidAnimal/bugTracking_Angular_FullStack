@@ -10,18 +10,19 @@
       <mat-error *ngIf="form.get('summary').invalid">Summary of the Issue</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Status:</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let bugs of bugStatus" [value]="bugs.value">
-          {{bugs.viewValue}}
-        </mat-option>
-      </mat-select>
+    <label>Status</label>
+    <mat-select formControlName="bugStatus" class="browser-default">
+      <mat-option *ngFor="let bug of bugStatus" [value]="bug.value">{{ bug.viewValue }}</mat-option>
+    </mat-select>
     </mat-form-field>
+
+    <!--To Get The Assignee I have to get a list of all users in the Database and then reference the list here For Now I Will Put Teams-->
     <mat-form-field>
-      <input matInput type="text" formControlName="assignee" placeholder="Assignee">
-      <mat-error *ngIf="form.get('assignee').invalid">Assignee</mat-error>
+        <label>Assignee</label>
+        <mat-select formControlName="assignee" class="browser-default">
+          <mat-option *ngFor="let assignee of assignees" [value]="assignee.value">{{ assignee.viewValue }}</mat-option>
+        </mat-select>
     </mat-form-field>
-    
     <div>
       <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
       <input type="file" #filePicker (change)="onImagePicked($event)">
@@ -29,10 +30,6 @@
     <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
       <img [src]="imagePreview" [alt]="form.value.title">
     </div>
-    <mat-form-field>
-      <textarea matInput rows="4" formControlName="creatorId" placeholder="Creator Id"></textarea>
-      <mat-error *ngIf="form.get('creatorId').invalid">Please enter a report title.</mat-error>
-    </mat-form-field>
     <button mat-raised-button color="accent" type="submit">Save Report</button>
   </form>
 </mat-card>

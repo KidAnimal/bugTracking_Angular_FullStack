@@ -21,6 +21,7 @@ export class ReportListComponent implements OnInit, OnDestroy {
   userIsAuthenticated = false;
   userId: string;
   userName: string;
+  users:string[];
   private reportsSub: Subscription;
   private authStatusSub: Subscription;
 
@@ -32,8 +33,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     this.reportsService.getReports(this.reportsPerPage, this.currentPage);
-    this.userId = this.authService.getUserId();
-    this.userName = this.authService.getUserName();
 
     this.reportsSub = this.reportsService
       .getReportUpdateListener()
@@ -49,9 +48,6 @@ export class ReportListComponent implements OnInit, OnDestroy {
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
         this.userId = this.authService.getUserId();
-        this.userName = this.authService.getUserName();
-        console.log("user ID: " + this.userId);
-        console.log("user Name: " + this.userName);
       });
   }
 

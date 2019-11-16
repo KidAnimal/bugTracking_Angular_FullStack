@@ -5,6 +5,9 @@
   <span class="spacer"></span>
   <ul>
     <li *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="/auth/profile" routerLinkActive="mat-accent">User: {{ userName }}</a>
+    </li>
+    <li *ngIf="userIsAuthenticated">
       <a mat-button routerLink="/create" routerLinkActive="mat-accent">New Report</a>
     </li>
     <li *ngIf="!userIsAuthenticated">

@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const reportSchema = mongoose.Schema({
   creatorId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  userName: { type: String, ref: "User", required: true},
   title: { type: String, required: true },
   summary: { type: String, required: true },
   imagePath: { type: String, required: true },
